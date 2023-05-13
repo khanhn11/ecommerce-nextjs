@@ -1,15 +1,16 @@
 import dbConnect from "@/util/mongo";
-import Product from "@/models/Product";
+import Order from "@/models/Order";
 
 const handler = async (req, res) => {
   await dbConnect();
+
   const { method } = req;
 
   switch (method) {
     case "GET":
       try {
-        const products = await Product.find();
-        res.status(200).json(products);
+        const orders = await Order.find();
+        res.status(200).json(orders);
       } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -20,8 +21,8 @@ const handler = async (req, res) => {
 
     case "POST":
       try {
-        const product = await Product.create(req.body);
-        res.status(201).json(product);
+        const order = await Order.create(req.body);
+        res.status(201).json(order);
       } catch (error) {
         console.error(error);
         res.status(500).json({

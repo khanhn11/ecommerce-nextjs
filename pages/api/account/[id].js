@@ -1,5 +1,5 @@
 import dbConnect from "@/util/mongo";
-import Product from "@/models/Product";
+import Account from "@/models/Account";
 
 const handler = async (req, res) => {
   const {
@@ -12,40 +12,43 @@ const handler = async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const product = await Product.findById(id);
-        if (!product) {
-          res.status(404).json({ message: "Product not found" });
+        const account = await Account.findById(id);
+        if (!account) {
+          res.status(404).json({ message: "Account not found" });
         }
-        res.status(200).json(product);
+        res.status(200).json(account);
       } catch (error) {
         console.error(error);
         res
           .status(500)
-          .json({ message: "An error occurred while getting the product." });
+          .json({ message: "An error occurred while getting the account." });
       }
       break;
 
     case "PUT":
       try {
-        const product = await Product.findByIdAndUpdate(id, req.body, {
+        const account = await Account.findByIdAndUpdate(id, req.body, {
           new: true,
         });
-        res.status(200).json(product);
+
+        res.status(200).json(account);
       } catch (error) {
         console.error(error);
         res.status(500).json({
-          message: "An error occurred while updating the product.",
+          message: "An error occurred while updating the account.",
         });
       }
       break;
 
     case "DELETE":
       try {
-        const product = await Product.findById(id);
-        if (!product) {
-          return res.status(404).json({ message: "Product not found." });
+        const account = await Account.findById(id);
+
+        if (!account) {
+          return res.status(404).json({ message: "Account not found." });
         }
-        await Product.findByIdAndDelete(id);
+
+        await Account.findByIdAndDelete(id);
         res.status(200).json({ message: "Successfully deleted the product" });
       } catch (error) {
         console.error(error);

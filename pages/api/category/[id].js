@@ -13,7 +13,10 @@ const handler = async (req, res) => {
     case "GET":
       try {
         const category = await Category.findById(id);
-        res.status(200).json(product);
+        if (!category) {
+          return res.status(404).json({ message: "Category not found." });
+        }
+        res.status(200).json(category);
       } catch (error) {
         console.error(error);
         res
@@ -27,7 +30,7 @@ const handler = async (req, res) => {
         const category = await Category.findByIdAndUpdate(id, req.body, {
           new: true,
         });
-        res.status(200).json(product);
+        res.status(200).json(category);
       } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -39,7 +42,7 @@ const handler = async (req, res) => {
     case "DELETE":
       try {
         const category = await Category.findById(id);
-        if (!product) {
+        if (!category) {
           return res.status(404).json({ message: "Category not found." });
         }
         await Category.findByIdAndDelete(id);
