@@ -3,7 +3,7 @@ import { Facebook, Instagram, Mail } from "@mui/icons-material/";
 
 const Footer = () => {
   return (
-    <div className="w-full h-60 bg-black text-white border-b border-gray-200 flex flex-col absolute m-0 ">
+    <div className="w-full h-60 bg-black text-white border-b border-gray-200 flex flex-col">
       <div className="mx-auto p-2 justify-center items-center text-center">
         <p>Brand Name</p>
       </div>

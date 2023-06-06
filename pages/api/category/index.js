@@ -9,8 +9,8 @@ const handler = async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const products = await Category.find();
-        res.status(200).json(products);
+        const cateogires = await Category.find();
+        res.status(200).json(cateogires);
       } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -21,8 +21,8 @@ const handler = async (req, res) => {
 
     case "POST":
       try {
-        const product = await Category.create(req.body);
-        res.status(201).json(product);
+        const category = await Category.create(req.body);
+        res.status(201).json(category);
       } catch (error) {
         console.error(error);
         res.status(500).json({
